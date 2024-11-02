@@ -2,18 +2,16 @@ version: '3.8'
 
 services:
   bot:
-    build: .
+    build:
+      context: .
+      dockerfile: Dockerfile
     container_name: youtube_bot_container
     restart: always
-    environment:
-      - API_TOKEN=7772934225:AAE6W36t4Y-faLoiV0wBnM4GgnARVDXgVCE
+    env_file:
+      - .env
     volumes:
-      - bot_data:/app/data
-      - bot_temp:/tmp
-    # Uncomment and adjust the following lines if your application exposes ports
-    # ports:
-    #   - "8080:8080"
+      - data:/app/data  # Persistent data storage
+      - ./cookies.txt:/app/cookies.txt  # Cookies file for authentication if needed
 
 volumes:
-  bot_data:
-  bot_temp:
+  data:
