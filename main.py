@@ -141,7 +141,9 @@ async def download_and_send_video(message: types.Message, url: str, platform: st
         'outtmpl': os.path.join(tempfile.gettempdir(), '%(title)s.%(ext)s'),
         'noplaylist': True,
         'progress_hooks': [download_hook],
+        'match_filter': '!(age_restricted)',
         'prefer_ffmpeg': True,
+          # Skip age-restricted content
     }
 
     try:
